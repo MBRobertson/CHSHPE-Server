@@ -1,0 +1,46 @@
+nav {
+    display: block;
+    width: 100%;
+    height: 50px;
+    border-top: 1px solid lighten($school-color, 12%);
+    border-bottom: 1px solid darken($school-color, 5%);
+    //box-sizing: border-box;
+    border-radius: 5px;
+    box-shadow: 0 0 0 1px darken($school-color, 12%),
+                1px 1px 3px #7b7b7b;
+    background-color: $school-color;
+
+    h1 {
+        display: inline-block;
+        font-size: 20px;
+        text-shadow: 0 0 3px black;
+        width: auto;
+        margin: 0 25px;
+        color: white;
+        font-weight: normal;
+        position: relative;
+        top: 50%;
+        transform: translateY(-50%);
+    }
+
+    a {
+        vertical-align: top;
+        display: inline-block;
+        padding: 5px 12px;
+        margin: 0 5px;
+        color: white;
+        background-color: rgba(#fff, 0);
+        text-transform: uppercase;
+        position: relative;
+        top: 50%;
+        transform: translateY(-50%);
+        text-decoration: none;
+        font-size: 13px;
+        border-radius: 3px;
+
+        &.active {
+            color: $school-color;
+            background-color: white;
+        }
+    }
+}

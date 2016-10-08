@@ -1,0 +1,119 @@
+@import './manage/class-editor.scss';
+
+#managePage {
+    .card {
+        display: block;
+        width: 100%;
+        margin: 20px 0;
+        padding: 15px 20px;
+        box-sizing: border-box;
+        background-color: white;
+        border-radius: 5px;
+        box-shadow: 1px 1px 4px #555555;
+        overflow: hidden;
+    }
+
+    .button {
+        float: right;
+        color: $school-color;
+        text-transform: uppercase;
+        display: block;
+        padding: 7px 15px;
+        border: 1px solid rgb(210, 210, 210);
+        text-decoration: none;
+        border-radius: 3px;
+        margin: 3px 8px;
+        font-size: 14px;
+
+        &.left {
+            float: left;
+        }
+    }
+
+    .list {
+        list-style: none;
+        margin: 0;
+        padding: 15px 5px;
+        display: block;
+        width: 100%;
+        box-sizing: border-box;
+
+        .list-item {
+            height: 35px;
+
+            padding: 6px 20px;
+            box-sizing: border-box;
+            border-bottom: 1px solid #d0d0d0;
+
+            //cursor: pointer;
+            overflow: hidden;
+
+            .list-title {
+                font-weight: normal;
+                color: #01579b;
+                font-size: 16px;
+                text-decoration: none;
+            }
+
+            .list-link {
+                display: none;
+                float: right;
+                font-weight: normal;
+                text-transform: uppercase;
+                padding: 1px 5px;
+                margin: 0 5px;
+                text-decoration: none;
+                color: #01569B;
+                font-size: 14px;
+            }
+
+            &:hover {
+                background-color: #efefef;
+
+                .list-title {
+                    text-decoration: underline;
+                }
+
+                .list-link {
+                    display: inline-block;
+                }
+            }
+
+            &:first-child {
+                border-top: 1px solid #d0d0d0;
+            }
+        }
+    }
+
+
+
+    h3 {
+    	font-size: 22px;
+        margin: 0;
+        color: #585858;
+        display: inline-block;
+    }
+
+    .subheader {
+        vertical-align: top;
+        display: inline-block;
+        margin: 5px 20px;
+    }
+
+    .cur-classes {
+        padding: 0 10px;
+
+        h4 {
+            margin: 5px;
+            color: #606060;
+        }
+
+        .cur-list {
+            padding: 0 10px;
+
+            span {
+                padding: 5px;
+            }
+        }
+    }
+}

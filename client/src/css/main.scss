@@ -1,0 +1,20 @@
+@import './config.scss';
+@import './nav.scss';
+@import './fonts/fonts.scss';
+
+@import './pages/login.scss';
+@import './pages/manage.scss';
+@import './pages/schedule.scss';
+
+body {
+    font-family: 'Open Sans', Arial, sans-serif;
+    background-color: whitesmoke;
+}
+
+main {
+    display: block;
+    max-width: 960px;
+    margin: 0 auto;
+    box-sizing: border-box;
+    padding: 15px;
+}

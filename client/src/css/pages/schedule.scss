@@ -1,0 +1,119 @@
+#schedulePage {
+    .button {
+        float: right;
+        color: $school-color;
+        text-transform: uppercase;
+        display: block;
+        padding: 7px 15px;
+        border: 1px solid rgb(210, 210, 210);
+        text-decoration: none;
+        border-radius: 3px;
+        margin: 3px 8px;
+        font-size: 14px;
+        cursor: pointer;
+
+        &.left {
+            float: left;
+        }
+    }
+
+    .schedule-nav {
+        width: 100%;
+        border-collapse: collapse;
+        margin: 0 auto 20px;
+
+        &.period-table {
+            width: 75%;
+        }
+
+        td, th {
+            background-color: white;
+            border: 1px solid #{$school-color};
+            text-align: center;
+            padding: 5px;
+            font-weight: normal;
+        }
+
+        th {
+            background-color: #dedede;
+        }
+
+        .today {
+            font-weight: bold;
+        }
+
+        .day-button {
+            cursor: pointer;
+
+            &:hover {
+                background-color: #bebebe;
+            }
+
+            &.active {
+                background-color: $school-color;
+                color: white;
+            }
+        }
+
+        .period-button {
+            cursor: pointer;
+
+            &:hover {
+                background-color: #bebebe;
+            }
+
+            &.active {
+                background-color: $school-color;
+                color: white;
+            }
+        }
+    }
+
+    .cardHolder {
+        display: block;
+        height: auto;
+        box-sizing: border-box;
+        margin: 15px auto;
+        padding: 0px 7px;
+        width: 600px;
+
+        .card {
+            display: block;
+            width: 100%;
+            background-color: white;
+            box-sizing: border-box;
+            padding: 10px 15px;
+            border-radius: 5px;
+            box-shadow: 1px 1px 4px #393939;
+            overflow: hidden;
+
+            h5 {
+                font-size: 14px;
+                margin: 0;
+                padding: 5px 10px;
+            }
+        }
+
+        .classPicker {
+            padding: 7px 25px;
+            border-bottom: 1px solid #d2d2d2;
+
+            &:last-of-type {
+                border-bottom: 0;
+            }
+
+            span {
+                display: inline-block;
+                width: 35%;
+            }
+
+            select {
+                display: inline-block;
+                width: 65%;
+                vertical-align: top;
+                height: 22px;
+            }
+        }
+    }
+
+}

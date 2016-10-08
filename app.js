@@ -1,43 +1,26 @@
-const http         = require('http'),
-      fs           = require('fs'),
-      path         = require('path'),
-      contentTypes = require('./utils/content-types'),
-      sysInfo      = require('./utils/sys-info'),
-      env          = process.env;
+var express = require('express');
+var morgan = require('morgan');
 
-let server = http.createServer(function (req, res) {
-  let url = req.url;
-  if (url == '/') {
-    url += 'index.html';
-  }
+var api = require('./api/api');
+var path = require('path');
 
-  // IMPORTANT: Your application HAS to respond to GET /health with status 200
-  //            for OpenShift health monitoring
+var app = express();
+app.use(morgan("dev"));
 
-  if (url == '/health') {
-    res.writeHead(200);
-    res.end();
-  } else if (url == '/info/gen' || url == '/info/poll') {
-    res.setHeader('Content-Type', 'application/json');
-    res.setHeader('Cache-Control', 'no-cache, no-store');
-    res.end(JSON.stringify(sysInfo[url.slice(6)]()));
-  } else {
-    fs.readFile('./static' + url, function (err, data) {
-      if (err) {
-        res.writeHead(404);
-        res.end('Not found');
-      } else {
-        let ext = path.extname(url).slice(1);
-        res.setHeader('Content-Type', contentTypes[ext]);
-        if (ext === 'html') {
-          res.setHeader('Cache-Control', 'no-cache, no-store');
-        }
-        res.end(data);
-      }
-    });
-  }
-});
+//Routing logic
+app.use('/', express.static(path.join(__dirname, 'client', 'bin')));
+app.use('/api', api);
 
-server.listen(env.NODE_PORT || 3000, env.NODE_IP || 'localhost', function () {
-  console.log(`Application worker ${process.pid} started...`);
+app.use('/*', function(res, req) {
+    req.sendFile(path.join(__dirname, 'client', 'bin', 'index.html'));
+})
+
+//Start the server
+
+var port = process.env.OPENSHIFT_NODEJS_PORT || process.env.PORT || 3000
+var ip = process.env.OPENSHIFT_NODEJS_IP || process.env.IP || '127.0.0.1'
+
+var server = app.listen(port, ip, () => {
+    console.log('App listening on port %s', server.address().port);
+    console.log('Press Ctrl+C to quit.');
 });

@@ -1,0 +1,62 @@
+
+/*html,body,#app,main {
+    height: 100%;
+    margin: 0;
+}*/
+
+#login {
+    form {
+        display: block;
+        background-color: white;
+        //position: relative;
+        //top: 40%;
+        //transform: translateY(-50%);
+        border-radius: 5px;
+        box-shadow: 1px 1px 3px #4f4f4f;
+        max-width: 400px;
+        margin: 100px auto 0;
+        padding: 15px 25px;
+        box-sizing: border-box;
+        color: #3d3d3d;
+
+        h2 {
+            display: block;
+            margin: 0;
+            width: 100%;
+            text-align: center;
+            padding: 0px 0;
+        }
+
+        input:focus {
+            outline: none;
+        }
+
+        input[type="password"] {
+            display: block;
+            width: 80%;
+            margin: 20px auto;
+            height: 22px;
+            border: 1px solid #a7a7a7;
+            border-radius: 3px;
+            background-color: #efefef;
+            text-align: center;
+            font-size: 16px;
+        }
+
+        input[type="submit"] {
+            display: block;
+            width: 80%;
+            max-width: 180px;
+            margin: 10px auto 5px;
+            height: 28px;
+            border: 1px solid darken($school-color, 12%);
+            border-radius: 3px;
+            box-sizing: border-box;
+            color: white;
+            font-weight: bold;
+            background-color: $school-color;
+            cursor: pointer;
+            font-size: 14px;
+        }
+    }
+}
