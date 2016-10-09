@@ -44,12 +44,12 @@ var getPeriod = function() {
 }
 var getTime = function(weekAEven) {
     var day = getDay(weekAEven);
-    //var now = moment.tz('NZ');
+    var now = moment.tz('NZ');
     return {
         week: day.week,
         day: day.day,
         period: getPeriod(),
-        //time: now.format()
+        time: now.format()
     }
 }
 
