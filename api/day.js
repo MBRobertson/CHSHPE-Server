@@ -26,14 +26,14 @@ var periods = {
 }
 
 var getDay = function(weekAEven) {
-    var now = moment().tz('NZ');
+    var now = moment.tz('NZ');
     var reference = weekAEven ? 2 : 1
     var week = (now.week() % 2 == reference % 2) ? 'A' : 'B'
     return {week: week, day: now.day().toString() }
 }
 
 var getPeriod = function() {
-    var now = moment().tz('NZ');
+    var now = moment.tz('NZ');
     for (var p = 1; p <= 5; p++) {
         if (now.isBetween(periods[p].start, periods[p].end)) {
             return p;
