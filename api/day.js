@@ -45,11 +45,15 @@ var getPeriod = function() {
 var getTime = function(weekAEven) {
     var day = getDay(weekAEven);
     var now = moment.tz('NZ');
+    var now2 = moment.tz('NZ', "10:40am", "h:mma");
+    var now3 = moment.tz('NZ', "1:30pm", "h:mma");
     return {
         week: day.week,
         day: day.day,
         period: getPeriod(),
-        time: now.format()
+        time: now.format(),
+        now2: now2.format(),
+        now3: now3.format()
     }
 }
 
