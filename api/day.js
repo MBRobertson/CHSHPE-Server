@@ -4,24 +4,24 @@ var Config = require('./db/config');
 
 var periods = {
     1: {
-        start: moment("8:30am", "h:mma"),
-        end: moment("9:35am", "h:mma")
+        start: moment("8:30am", "h:mma").tz('NZ'),
+        end: moment("9:35am", "h:mma").tz('NZ')
     },
     2: {
-        start: moment("9:35am", "h:mma"),
-        end: moment("10:40am", "h:mma")
+        start: moment("9:35am", "h:mma").tz('NZ'),
+        end: moment("10:40am", "h:mma").tz('NZ')
     },
     3: {
-        start: moment("10:40am", "h:mma"),
-        end: moment("12:25pm", "h:mma")
+        start: moment("10:40am", "h:mma").tz('NZ'),
+        end: moment("12:25pm", "h:mma").tz('NZ')
     },
     4: {
-        start: moment("12:25pm", "h:mma"),
-        end: moment("1:30pm", "h:mma")
+        start: moment("12:25pm", "h:mma").tz('NZ'),
+        end: moment("1:30pm", "h:mma").tz('NZ')
     },
     5: {
-        start: moment("1:30pm", "h:mma"),
-        end: moment("3:15pm", "h:mma")
+        start: moment("1:30pm", "h:mma").tz('NZ'),
+        end: moment("3:15pm", "h:mma").tz('NZ')
     }
 }
 
