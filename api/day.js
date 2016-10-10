@@ -2,6 +2,8 @@ var moment = require('moment-timezone');
 
 var Config = require('./db/config');
 
+moment.tz.setDefault("NZ");
+
 var periods = {
     1: {
         start: moment.tz("8:30am", "h:mma", "NZ"),
