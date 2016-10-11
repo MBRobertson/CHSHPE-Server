@@ -70,7 +70,7 @@ var getPeriod = function() {
 
 
     }
-    //end.set()
+    end.set(periods[5].end)
     if (now.isAfter(end)) return -1;
     return 0;
 }
@@ -102,7 +102,7 @@ module.exports = {
             else {
                 var time = getTime(config.weekAEven);
                 //time.day = 4;
-                time.period = 5;
+                //time.period = 5;
                 res.json(time);
             }
         });
