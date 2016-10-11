@@ -137,7 +137,7 @@ class ClassHandler extends React.Component {
             success: (d) => {
                 this.setState({
                     ready: true,
-                    scheduleData: d.locations || {}
+                    scheduleData: d[0].locations || {}
                 })
             }
         })
