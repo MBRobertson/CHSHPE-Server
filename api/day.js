@@ -67,8 +67,8 @@ var getPeriod = function() {
         if (now.isBetween(start, end)) {
             return p;
         }
-        
-        
+
+
     }
     //end.set()
     if (now.isAfter(end)) return -1;
@@ -102,7 +102,7 @@ module.exports = {
             else {
                 var time = getTime(config.weekAEven);
                 //time.day = 4;
-                //time.period = 2;
+                time.period = 5;
                 res.json(time);
             }
         });

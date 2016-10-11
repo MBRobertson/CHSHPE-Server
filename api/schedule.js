@@ -33,12 +33,12 @@ router.get('/', function(req, res) {
 });*/
 
 router.get('/:slot', function(req, res) {
-    Schedule.findOne({ slot: req.params.slot }, function(err, c) {
+    Schedule.find({ slot: {$regex : "^" + req.params.slot} }).sort('slot').exec(function(err, c) {
         if (err)
-            res.json({ slot: req.params.slot, locations: {} })
+            res.json([{ slot: req.params.slot, locations: {} }])
         if (c) {
             if (c.locations == null)
-                c.locations = {};
+                c.locations = [{}];
             res.json(c);
         }
 

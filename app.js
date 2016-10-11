@@ -17,7 +17,7 @@ app.use('/*', function(res, req) {
 
 //Start the server
 
-var port = process.env.OPENSHIFT_NODEJS_PORT || process.env.PORT || 3000
+var port = process.env.OPENSHIFT_NODEJS_PORT || process.env.PORT || 3001
 var ip = process.env.OPENSHIFT_NODEJS_IP || process.env.IP || '127.0.0.1'
 
 var server = app.listen(port, ip, () => {
