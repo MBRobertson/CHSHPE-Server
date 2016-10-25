@@ -7,11 +7,7 @@ function timeFromString(str) {
     return {
         week: str.substring(0, 1),
         day: Number(str.substring(1))
-    }
-}
-
-var structure = {
-    "classID": location
+    };
 }
 
 var scheduleReady = true;
@@ -287,7 +283,8 @@ class ScheduleHeader extends React.Component {
             for (var d = 1; d <= 5; d++) {
                 let today = (this.props.time.day == d && thisWeek)
                 let id = w + d
-                var element = (<HeaderDay key={id} id={id} onClick={(this.changePageHandler(id)).bind(this)} currentPage={this.props.currentPage} today={today} day={d}/>)
+                let nd = w == 'B' ? d + 5 : d;
+                var element = (<HeaderDay key={id} id={id} onClick={(this.changePageHandler(id)).bind(this)} currentPage={this.props.currentPage} today={today} day={nd}/>)
                 dayButtons.push(element);
             }
         }
