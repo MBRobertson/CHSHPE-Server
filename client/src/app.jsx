@@ -57,8 +57,7 @@ ReactDOM.render(
     (<Router history={browserHistory}>
         <Route path="/login" component={Login}/>
         <Route path="/" component={App}>
-            <IndexRoute path="" component={Home} />
-            <Route path="schedule" component={Schedule}/>
+            <IndexRoute path="" component={Schedule}/>
             <Route path="manage">
                 <IndexRoute path="" component={Manage} />
                 <Route path="class(/:id)" component={ClassEditor} />

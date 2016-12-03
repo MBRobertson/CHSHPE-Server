@@ -96,11 +96,13 @@ class Schedule extends React.Component {
         } else {
             let time = timeFromString(this.state.currentPage);
             time['period'] = this.state.period;
+            let dnum = time.week == 'B' ? time.day + 5 : time.day;
+
             return (
                 <div id="schedulePage">
                     <h3>Schedule</h3>
                     <ScheduleHeader handler={this.changePage} periodChange={this.changePeriod.bind(this)} currentPage={this.state.currentPage} time={this.state.time}/>
-                    <ClassHandler time={time} classList={this.state.classList} locationList={this.state.locationList}/>
+                    <ClassHandler time={time} classList={this.state.classList} locationList={this.state.locationList} dnum={dnum}/>
                 </div>
             )
         }
@@ -203,7 +205,7 @@ class ClassHandler extends React.Component {
             return (
                 <div className="cardHolder" id="classList">
                     <div className="card">
-                        <h5>{'Week ' + time.week + ' - Day ' + time.day + ' - Period ' + time.period + ' - Classes'}</h5>
+                        <h5>{'Week ' + time.week + ' - Day ' + this.props.dnum + ' - Period ' + time.period}</h5>
                         {this.getClasses().map((c) => {
                             return (<ClassPicker handler={this.onChange} schedule={this.state.scheduleData} key={c._id} class={c} locations={this.props.locationList}/>)
                         })}
@@ -280,14 +282,17 @@ class ScheduleHeader extends React.Component {
         var weekHeaders = [];
         var periodButtons = [];
 
+        let dnum = 1;
         for (var i = 0; i < weeks.length; i++) {
             let w = weeks[i]
             let thisWeek = this.props.time.week == w;
             weekHeaders.push(<th key={w} className={thisWeek ? 'today' : ''} colSpan="5">{'Week ' + w}</th>);
+
             for (var d = 1; d <= 5; d++) {
                 let today = (this.props.time.day == d && thisWeek)
                 let id = w + d
-                var element = (<HeaderDay key={id} id={id} onClick={(this.changePageHandler(id)).bind(this)} currentPage={this.props.currentPage} today={today} day={d}/>)
+                var element = (<HeaderDay key={id} id={id} onClick={(this.changePageHandler(id)).bind(this)} currentPage={this.props.currentPage} today={today} day={d} dnum={dnum}/>)
+                dnum++;
                 dayButtons.push(element);
             }
         }
@@ -327,7 +332,7 @@ class ScheduleHeader extends React.Component {
 class HeaderDay extends React.Component {
     render() {
         return (
-            <td onClick={this.props.onClick} className={'day-button' + (this.props.today ? ' today' : '') + (this.props.id == this.props.currentPage ? ' active' : '')}>{'Day ' + this.props.day}</td>
+            <td onClick={this.props.onClick} className={'day-button' + (this.props.today ? ' today' : '') + (this.props.id == this.props.currentPage ? ' active' : '')}>{'Day ' + this.props.dnum}</td>
         )
     }
 }

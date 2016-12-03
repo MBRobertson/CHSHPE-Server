@@ -5,13 +5,8 @@ import { Link } from 'react-router';
 let links = [
     {
         id: 1,
-        name: "Dashboard",
-        url: "/"
-    },
-    {
-        id: 2,
         name: "Schedule",
-        url: "/schedule"
+        url: "/"
     },
     {
         id: 3,
@@ -29,7 +24,7 @@ class Nav extends React.Component {
         });
         return (
             <nav>
-                <h1>CHS PE</h1>
+                <h1>CHS HPE</h1>
                 {linkNodes}
             </nav>
         );
