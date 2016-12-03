@@ -7,11 +7,7 @@ function timeFromString(str) {
     return {
         week: str.substring(0, 1),
         day: Number(str.substring(1))
-    }
-}
-
-var structure = {
-    "classID": location
+    };
 }
 
 var scheduleReady = true;
@@ -139,7 +135,7 @@ class ClassHandler extends React.Component {
             success: (d) => {
                 this.setState({
                     ready: true,
-                    scheduleData: d.locations || {}
+                    scheduleData: (d[0] || { locations: {}}).locations || {}
                 })
             }
         })
