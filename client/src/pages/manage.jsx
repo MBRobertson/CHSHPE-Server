@@ -212,7 +212,7 @@ class Manage extends React.Component {
             <div id="managePage">
                 <div className="card">
                     {time}
-                    <Link className="button" to="/schedule">Schedule</Link>
+                    {/* <Link className="button" to="/schedule">Schedule</Link> */}
                     <a className="button" onClick={this.changeWeek.bind(this)} href="#">{ this.state.changingWeek ? 'Changing...' : 'Swap Week'}</a>
                 </div>
                 <div className="card">

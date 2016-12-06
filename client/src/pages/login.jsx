@@ -77,7 +77,7 @@ class Login extends React.Component {
             return (
                 <main id="login">
                     <form onSubmit={this.onSubmit}>
-                        <h2>CHS PE</h2>
+                        <h2>CHS HPE</h2>
                         <input type="password" value={this.state.pass} onChange={this.onPassChange.bind(this)} name="key"/>
                         <input type="submit" value="Login"/>
                     </form>
