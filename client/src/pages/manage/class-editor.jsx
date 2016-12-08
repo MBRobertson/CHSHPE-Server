@@ -39,7 +39,8 @@ class ClassEditor extends React.Component {
             teacher: 'No Teacher',
             teacherID: '',
             timetable: [],
-            teacherList: []
+            teacherList: [],
+            catagory: 'y9'
         }
     }
 
@@ -48,14 +49,14 @@ class ClassEditor extends React.Component {
         if (this.state.id != '') {
             auth.req('/api/class/' + this.state.id, {
                 success: (c) => {
-                    console.log(c);
                     this.setState({
                         ready: true,
                         update: true,
                         name: c.name,
                         teacher: c.teacher,
                         teacherID: c.teacherID,
-                        timetable: c.timetable
+                        timetable: c.timetable,
+                        catagory: c.catagory || 'y9'
                     })
                 },
                 error: () => {
@@ -83,13 +84,15 @@ class ClassEditor extends React.Component {
     }
 
     onChangeTeacher(e) {
-        console.log({
-            teacherID: e.target.value,
-            teacher: teacherReference[e.target.value]
-        });
         this.setState({
             teacherID: e.target.value,
             teacher: teacherReference[e.target.value]
+        });
+    }
+
+    onChangeCatagory(e) {
+        this.setState({
+            catagory: e.target.value,
         });
     }
 
@@ -112,6 +115,7 @@ class ClassEditor extends React.Component {
             name: this.state.name,
             teacher: this.state.teacher,
             teacherID: this.state.teacherID,
+            catagory: this.state.catagory,
             timetable: timetableToString(this.state.timetable)
         }, (this.state.update ? 'PUT' : 'POST'))
     }
@@ -144,8 +148,17 @@ class ClassEditor extends React.Component {
                             </div>
                             <div className='input-block half'>
                                 <label htmlFor="teacher">Teacher:</label>
-                                {/* <input type="text" id="teacher" placeholder="Teacher Code" value={this.state.teacher} onChange={this.onChangeTeacher.bind(this)}/> */}
                                 <select id="teacher" value={this.state.teacherID} onChange={this.onChangeTeacher.bind(this)} name="teacher">{teacherItems}</select>
+                            </div>
+                            <div className='input-block half'>
+                                <label htmlFor="catagory">Year Level:</label>
+                                <select id="teacher" value={this.state.catagory} onChange={this.onChangeCatagory.bind(this)} name="catagory">
+                                    <option id="y9-cat" value="y9">Year 9</option>
+                                    <option id="y10-cat" value="y10">Year 10</option>
+                                    <option id="y11-cat" value="y11">Year 11</option>
+                                    <option id="y12-cat" value="y12">Year 12</option>
+                                    <option id="y13-cat" value="y13">Year 13</option>
+                                </select>
                             </div>
                             <div className='input-block'>
                                 <input type="hidden" id="timetable" value={this.state.timetable} />
@@ -153,7 +166,7 @@ class ClassEditor extends React.Component {
                             </div>
                         </form>
                         <a className="button" href="#" onClick={this.save.bind(this)}>{this.state.saving ? 'Saving...' : 'Save'}</a>
-                        <Link className="button left" to="/manage">Cancel</Link>
+                        <Link className="button left" to={"/manage/class/catagory/" + this.state.catagory}>Cancel</Link>
                     </div>
                 </div>
             )

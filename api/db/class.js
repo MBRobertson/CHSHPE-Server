@@ -4,6 +4,7 @@ var classSchema = mongoose.Schema({
     name: String,
     teacher: String,
     teacherID: String,
+    catagory: String,
     timetable: [String]
 })
 

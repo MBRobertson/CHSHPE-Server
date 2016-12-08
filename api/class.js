@@ -6,12 +6,21 @@ var auth = function() {
     return passport.authenticate('jwt', { session: false});
 }
 
-router.get('/', function(req, res) {
-    Class.find().sort('teacher').exec(function(err, bears) {
+router.get('/cat/:cat', function(req, res) {
+    Class.find({ catagory: req.params.cat }).sort('catagory').exec(function(err, c) {
         if (err)
             res.send(err);
 
-        res.json(bears);
+        res.json(c);
+    });
+});
+
+router.get('/', function(req, res) {
+    Class.find().sort('catagory').exec(function(err, c) {
+        if (err)
+            res.send(err);
+
+        res.json(c);
     });
 });
 
@@ -21,6 +30,7 @@ router.post('/', auth(), function(req, res) {
     c.teacher = req.body.teacher || '';
     c.teacherID = req.body.teacherID || '';
     c.timetable = (req.body.timetable || '').split('-')
+    c.catagory = (req.body.catagory || '');
 
     if (c.name != '' && c.teacher != '' & c.timetable != '') {
         c.save(function(err) {
@@ -44,21 +54,23 @@ router.get('/:class_id', function(req, res) {
 });
 
 router.put('/:class_id', auth(), function(req, res) {
-    // use our bear model to find the bear we want
     Class.findById(req.params.class_id, function(err, c) {
 
         if (err)
             res.send(err);
 
         if (req.body.name && req.body.name != '')
-            c.name = req.body.name;  // update the bears info
+            c.name = req.body.name;
         if (req.body.teacher && req.body.teacher != '')
             c.teacher = req.body.teacher;
         if (req.body.teacherID)
             c.teacherID = req.body.teacherID
         if (req.body.timetable && req.body.timetable != '')
             c.timetable = (req.body.timetable).split('-')
-        // save the bear
+        if (req.body.catagory)
+            c.catagory = req.body.catagory
+
+
         c.save(function(err) {
             if (err)
                 res.send(err);

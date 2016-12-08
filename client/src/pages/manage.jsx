@@ -218,7 +218,12 @@ class Manage extends React.Component {
                 <div className="card">
                     <h3>Classes</h3>
                     <ul id="classList" className="list">
-                        {classItems}
+                        {/*classItems*/}
+                        <CatagoryItem id="y9" cat="y9" text="Year 9"/>
+                        <CatagoryItem id="y10" cat="y10" text="Year 10"/>
+                        <CatagoryItem id="y11" cat="y11" text="Year 11"/>
+                        <CatagoryItem id="y12" cat="y12" text="Year 12"/>
+                        <CatagoryItem id="y13" cat="y13" text="Year 13"/>
                     </ul>
                     <Link className="button" to="/manage/class/">Add Class</Link>
                 </div>
@@ -261,6 +266,14 @@ class ListItem extends React.Component {
             <Link className="list-title" to={'/manage/' + this.props.api + '/' + this.props.id}>{this.props.text}</Link>
             <a className="list-link" onClick={this.onDelete.bind(this)} href="#">Delete</a>
             <Link className="list-link" to={'/manage/' + this.props.api + '/' + this.props.id}>Edit</Link>
+        </li>);
+    }
+}
+
+class CatagoryItem extends React.Component {
+    render() {
+        return (<li className="list-item" id={this.props.id}>
+            <Link className="list-title" to={'/manage/class/catagory/' + this.props.cat}>{this.props.text}</Link>
         </li>);
     }
 }

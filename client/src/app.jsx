@@ -12,6 +12,7 @@ import Nav from './components/nav.jsx';
 import Login from './pages/login.jsx';
 import { Manage, ClassEditor, LocEditor, TeacherEditor, ImageEditor } from './pages/manage.jsx';
 import { Schedule } from './pages/schedule.jsx';
+import { CatagoryView } from './pages/catagory.jsx';
 
 //import { Home } from './pages/home.jsx';
 
@@ -60,6 +61,7 @@ ReactDOM.render(
             <IndexRoute path="" component={Schedule}/>
             <Route path="manage">
                 <IndexRoute path="" component={Manage} />
+                <Route path="class/catagory(/:cat)" component={CatagoryView}/>
                 <Route path="class(/:id)" component={ClassEditor} />
                 <Route path="loc(/:id)" component={LocEditor} />
                 <Route path="teacher(/:id)" component={TeacherEditor} />
