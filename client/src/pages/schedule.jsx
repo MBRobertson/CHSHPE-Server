@@ -96,7 +96,8 @@ class Schedule extends React.Component {
 
             return (
                 <div id="schedulePage">
-                    <h3>Schedule</h3>
+                    {/*<h3>Schedule</h3>*/}
+                    <Link to="/print" className="button print-button">Print Schedule</Link>
                     <ScheduleHeader handler={this.changePage} periodChange={this.changePeriod.bind(this)} currentPage={this.state.currentPage} time={this.state.time}/>
                     <ClassHandler time={time} classList={this.state.classList} locationList={this.state.locationList} dnum={dnum}/>
                 </div>

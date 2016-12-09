@@ -14,6 +14,8 @@ import { Manage, ClassEditor, LocEditor, TeacherEditor, ImageEditor } from './pa
 import { Schedule } from './pages/schedule.jsx';
 import { CatagoryView } from './pages/catagory.jsx';
 
+import Printable from './client-sandbox/schedule.jsx';
+
 //import { Home } from './pages/home.jsx';
 
 class App extends React.Component {
@@ -57,6 +59,7 @@ class Home extends React.Component {
 ReactDOM.render(
     (<Router history={browserHistory}>
         <Route path="/login" component={Login}/>
+        <Route path="/print" component={Printable}/>
         <Route path="/" component={App}>
             <IndexRoute path="" component={Schedule}/>
             <Route path="manage">
