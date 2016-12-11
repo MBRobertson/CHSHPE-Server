@@ -1,0 +1,87 @@
+#printPage {
+    .ui-card {
+        max-width: 600px;
+        margin: 15px auto 10px;
+        background-color: white;
+        border-radius: 4px;
+        box-shadow: 1px 1px 5px #797979;
+        padding: 5px 25px 20px;
+    }
+
+    h4 {
+        font-family: 'Roboto Condensed',Arial,sans-serif;
+        margin: 0 0 10px;
+        font-size: 25px;
+        color: #3c3c3c;
+    }
+
+    .class {
+        font-size: 18px;
+        font-family: 'Roboto',Arial,sans-serif;
+        text-align: center;
+        border-bottom: 1px solid #d2d2d2;
+        overflow: hidden;
+
+        &:first-of-type {
+            border-top: 1px solid #d2d2d2;
+        }
+
+        .name {
+            padding: 1px 6px;
+            display: inline-block;
+            box-sizing: border-box;
+            //margin-right: 100px;
+            text-align: center;
+            width: 50%;
+            margin: 0;
+            float: left;
+            font-weight: bold;
+            .code {
+                font-size: 14px;
+                font-family: 'Roboto Condensed',Arial,sans-serif;
+                font-weight: bold;
+                margin: 6px;
+                color: #636363;
+            }
+        }
+
+        .location {
+            //margin-left: 100px;
+            display: inline-block;
+            box-sizing: border-box;
+            float: right;
+            text-align: center;
+            width: 50%;
+            margin: 0;
+        }
+    }
+
+    .button {
+        color: $school-color;
+        text-transform: uppercase;
+        display: block;
+        padding: 7px;
+        border: 1px solid rgb(210, 210, 210);
+        text-decoration: none;
+        display: block;
+        width: 220px;
+        text-align: center;
+        border-radius: 3px;
+        margin: 10px auto;
+        font-size: 14px;
+        cursor: pointer;
+        background-color: white;
+    }
+}
+
+
+@media print {
+    .no-print {
+        display: none;
+    }
+    .ui-card {
+        box-shadow: 0 0 0 0 !important;
+        border-radius: 0 !important;
+        border-bottom: 2px dashed rgb(124, 124, 124);
+    }
+}
