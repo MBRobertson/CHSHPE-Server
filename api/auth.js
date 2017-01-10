@@ -3,7 +3,7 @@ var jwt = require('jwt-simple');
 
 module.exports = {
     handler: function(req, res) {
-        if (req.body.key == "doorframe") {
+        if (req.body.key == settings.password) {
             var token = jwt.encode({ key: "doorframe" }, settings.secret);
             res.json({success: true, token: token});
         } else {

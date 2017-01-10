@@ -7,7 +7,7 @@ var auth = function() {
 }
 
 router.get('/', function(req, res) {
-    Location.find().sort('name').exec(function(err, bears) {
+    Location.find({ temp: false }).sort('name').exec(function(err, bears) {
         if (err)
             res.send(err);
 
@@ -30,6 +30,14 @@ router.post('/', auth(), function(req, res) {
         res.json({success: false});
     }
 
+});
+
+router.post('/temp', auth(), function(req, res) {
+    Location.findOrCreate({ name: req.body.name, temp: true }, function(err, c, created) {
+        if (err)
+            res.send(err);
+        res.json(c);
+    })
 });
 
 router.get('/:Location_id', function(req, res) {

@@ -8,7 +8,7 @@ module.exports = function(passport) {
     opts.secretOrKey = settings.secret;
     opts.jwtFromRequest = ExtractJwt.fromAuthHeader();
     passport.use(new JwtStrategy(opts, function(jwt_payload, done) {
-        if (jwt_payload.key == "doorframe") {
+        if (jwt_payload.key == settings.password) {
             done(null, jwt_payload.key);
         } else {
             done(null, false);
