@@ -1,0 +1,8 @@
+#!/bin/bash
+
+/home/ec2-user/.nvm/versions/node/v7.4.0/bin/forever \
+	start \
+	-c /home/ec2-user/.nvm/versions/node/v7.4.0/bin/node \
+	--sourceDir /home/ec2-user/chshpe-server \
+	--workingDir /home/ec2-user/chshpe-server \
+	app.js
