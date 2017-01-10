@@ -1,6 +1,8 @@
 var passport = require('passport');
 var Schedule = require('./db/schedule');
+var Location = require('./db/location');
 var router = require('express').Router();
+var Q = require('q')
 
 var auth = function() {
     return passport.authenticate('jwt', { session: false});
@@ -47,16 +49,27 @@ router.get('/:slot', function(req, res) {
     });
 });
 
+
 router.put('/:slot', auth(), function(req, res) {
-    // use our bear model to find the bear we want
-    Schedule.findOneAndUpdate({ slot: req.params.slot }, { locations: req.body.locations }, { upsert: true }, function(err) {
-        if (err)
-            res.send(err)
-        else {
-            res.json({success: true})
+    var loc = req.body.locations;
+    var promises = [];
+    for (var id in loc) {
+        if (loc[id].startsWith("temp:")) {
+            promises.push(Location.findOrCreate({ name: req.body.name, temp: true }, function(err, c, created) {
+                loc[id]  =  c._id;
+            }))
         }
+    }
+    Q.all(promises).done(function() {
+        Schedule.findOneAndUpdate({ slot: req.params.slot }, { locations: req.body.locations }, { upsert: true }, function(err) {
+            if (err)
+                res.send(err)
+            else {
+                res.json({success: true})
+            }
+        })
     })
-    //Schedule.findOneAndUpdate
+    
 });
 
 /*router.delete('/:location_id', auth(), function(req, res) {

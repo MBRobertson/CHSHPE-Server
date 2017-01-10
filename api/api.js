@@ -6,6 +6,7 @@ var bb = require('express-busboy');
 var settings = require('./config/settings')
 var path = require('path');
 mongoose.connect(settings.mongo);
+mongoose.Promise = require('q').Promise;
 
 //Sub-APIS
 var day = require('./day');
