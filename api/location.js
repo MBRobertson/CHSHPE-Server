@@ -7,11 +7,11 @@ var auth = function() {
 }
 
 router.get('/', function(req, res) {
-    Location.find({ temp: false }).sort('name').exec(function(err, bears) {
+    Location.find({}).sort('name').exec(function(err, loc) {
         if (err)
             res.send(err);
 
-        res.json(bears);
+        res.json(loc);
     });
 });
 

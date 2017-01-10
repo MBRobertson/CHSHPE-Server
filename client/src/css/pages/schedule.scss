@@ -115,11 +115,33 @@
                 width: 35%;
             }
 
-            select {
+            div {
                 display: inline-block;
                 width: 65%;
                 vertical-align: top;
-                height: 22px;
+                position: relative;
+
+                select, input[type="text"] {
+                    padding: 0;
+                    border: 1px solid rgb(180, 180, 180);
+                    font-size: 9pt;
+                    padding-left: 4px;
+                    box-sizing: border-box;
+                    display: inline-block;
+                    width: 100%;
+                    vertical-align: top;
+                    height: 22px;
+                }
+
+                .back-to-select {
+                    float: right;
+                    position: absolute;
+                    right: 5px;
+                    font-size: 14px;
+                    padding-top: 1px;
+                    color: blue;
+                    cursor: pointer;
+                }
             }
         }
     }

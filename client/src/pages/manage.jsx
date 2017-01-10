@@ -66,7 +66,12 @@ class Manage extends React.Component {
         });
         auth.req('/api/loc/', {
             success: (lList) => {
-                this.setState({ locationList: lList });
+                var nList = [];
+                lList.forEach(function(loc) {
+                    if (!loc.temp)
+                        nList.push(loc);
+                })
+                this.setState({ locationList: nList });
             }
         });
         auth.req('/api/teacher/', {
@@ -131,7 +136,12 @@ class Manage extends React.Component {
         this.setState({ locationList: [] });
         auth.req('/api/loc/', {
             success: (lList) => {
-                this.setState({ locationList: lList });
+                var nList = [];
+                lList.forEach(function(loc) {
+                    if (!loc.temp)
+                        nList.push(loc);
+                })
+                this.setState({ locationList: nList });
             }
         });
     }

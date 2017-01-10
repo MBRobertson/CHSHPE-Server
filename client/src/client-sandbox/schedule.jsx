@@ -97,7 +97,7 @@ class Schedule extends React.Component {
             return (
                 <div id="printPage">
                     {scheduleItems}
-                    <Link to="/" className="button no-print">Back</Link>
+                    <a to="/print" onClick={window.close} className="button no-print">Back</a>
                 </div>)
             ;
         }

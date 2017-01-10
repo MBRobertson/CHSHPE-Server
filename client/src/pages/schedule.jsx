@@ -67,11 +67,11 @@ class Schedule extends React.Component {
                 }
                 if (time.period <= 0)
                     time.period = 1;
-                console.log({
-                    currentPage: time.week + time.day,
-                    time: time,
-                    period: time.period
-                });
+                // console.log({
+                //     currentPage: time.week + time.day,
+                //     time: time,
+                //     period: time.period
+                // });
                 time.week = week;
                 this.setState({
                     currentPage: time.week + time.day,
@@ -97,7 +97,8 @@ class Schedule extends React.Component {
             return (
                 <div id="schedulePage">
                     {/*<h3>Schedule</h3>*/}
-                    <Link to="/print" className="button print-button">Print Schedule</Link>
+                    {/*<Link to="/print" className="button print-button">Print Schedule</Link>*/}
+                    <a href="/print" target="_blank" className="button print-button">Print Schedule</a>
                     <ScheduleHeader handler={this.changePage} periodChange={this.changePeriod.bind(this)} currentPage={this.state.currentPage} time={this.state.time}/>
                     <ClassHandler time={time} classList={this.state.classList} locationList={this.state.locationList} dnum={dnum}/>
                 </div>
@@ -154,6 +155,7 @@ class ClassHandler extends React.Component {
                         data[key] = this.state.scheduleData[key];
                 }
             }
+
 
             auth.req('/api/schedule/' + this.getTime(), {
                 success: (d) => {
@@ -221,6 +223,81 @@ class ClassHandler extends React.Component {
     }
 }
 
+class LocationPicker extends React.Component {
+    constructor(props) {
+        super(props);
+
+        var temporary = false;
+        var val = '';
+        props.locations.forEach(function(loc) {
+            if (loc._id == props.schedule[props.class._id] && loc.temp) {
+                temporary = true;
+                val = loc.name;
+            }
+        })
+        console.log(props.schedule[props.class._id]);
+        
+ 
+        this.state = {
+            loc: this.props.locations,
+            select: !temporary,
+            customLoc: val
+        }
+
+        this.state.loc.push({ _id: "temp-value", name: "=> Other...", temp: false })
+    }
+
+    onSelect(id) {
+        return (e) => {
+            let val = e.target.value;
+            if (val != "temp-value") {
+                this.props.handler(e.target.value, id);
+            } else {
+                this.setState({
+                    select: false
+                })
+            }
+            
+        }
+    }
+
+    onTextChange(id) {
+        return (e) => {
+            let val = e.target.value;
+            this.props.handler("temp:" + val, id);
+            this.setState({ customLoc: val });
+        }
+    }
+
+    render() {
+        if (this.state.select) {
+            return (<div key={"loc-selection"}>
+                <select value={this.props.schedule[this.props.class._id]} onChange={(this.onSelect(this.props.class._id)).bind(this)}>
+                    {
+                        this.state.loc.map((l) => {
+                            if (!l.temp)
+                                return (<option key={l._id} value={l._id}>{l.name}</option>)
+                        })
+                    }
+                </select>
+            </div>)
+        } else {
+            return (
+                <div key={"loc-custom"}>
+                    <input placeholder="Enter custom location here..." type="text" name="custom-loc" value={this.state.customLoc} onChange={(this.onTextChange(this.props.class._id)).bind(this)}/>
+                    <a onClick={function() {
+                        this.props.handler('', this.props.class._id);
+                        this.setState({
+                            select: true,
+                            customLoc: ''
+                        })
+                    }.bind(this)} className="back-to-select">{"< Back"}</a>
+                </div>
+            )
+        }
+    }
+}
+
 class ClassPicker extends React.Component {
     onSelect(id) {
         return (e) => {
@@ -232,13 +309,7 @@ class ClassPicker extends React.Component {
         return (
             <div className="classPicker">
                 <span>{this.props.class.name + ' (' + this.props.class.teacher + ')'}</span>
-                <select value={this.props.schedule[this.props.class._id]} onChange={(this.onSelect(this.props.class._id)).bind(this)}>
-                    {
-                        this.props.locations.map((l) => {
-                            return (<option key={l._id} value={l._id}>{l.name}</option>)
-                        })
-                    }
-                </select>
+                <LocationPicker locations={this.props.locations} schedule={this.props.schedule} class={this.props.class} handler={this.props.handler} />
             </div>
         )
     }

@@ -49,19 +49,35 @@ router.get('/:slot', function(req, res) {
     });
 });
 
+function PromiseTemp(condition, id) {
+    let result = Q.defer();
+    Location.findOrCreate(condition, function(err, loc, created) {
+        result.resolve({loc: loc, id: id});
+    });
+
+    return result.promise;
+}
+
 
 router.put('/:slot', auth(), function(req, res) {
     var loc = req.body.locations;
     var promises = [];
     for (var id in loc) {
         if (loc[id].startsWith("temp:")) {
-            promises.push(Location.findOrCreate({ name: req.body.name, temp: true }, function(err, c, created) {
-                loc[id]  =  c._id;
-            }))
+            let promise = PromiseTemp({ name: loc[id].substring(5), temp: true }, id);
+            // promise.then(function(c) {
+            //     console.log(c);
+            //     loc[id]  =  c._id;
+            // });
+            promises.push(promise)
         }
     }
-    Q.all(promises).done(function() {
-        Schedule.findOneAndUpdate({ slot: req.params.slot }, { locations: req.body.locations }, { upsert: true }, function(err) {
+    Q.all(promises).then(function(values) {
+        values.forEach(function(val) {
+            loc[val.id]  =  val.loc._id;
+        });
+        //console.log(values);
+        Schedule.findOneAndUpdate({ slot: req.params.slot }, { locations: loc }, { upsert: true }, function(err) {
             if (err)
                 res.send(err)
             else {
