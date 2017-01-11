@@ -83,5 +83,6 @@
         box-shadow: 0 0 0 0 !important;
         border-radius: 0 !important;
         border-bottom: 2px dashed rgb(124, 124, 124);
+        page-break-inside: avoid;
     }
 }

@@ -15,7 +15,11 @@ class Schedule extends React.Component {
             let info = data.getData();
             this.state = {
                 class: Config.user.getClass(),
-                day: info.time,
+                day: {
+                    week: this.props.params.time.substring(0, 1),
+                    day: this.props.params.time.substring(1, 2),
+                    period: 1
+                },
                 schedule: info.schedule,
                 classList: info.classes,
                 locationList: info.locations
@@ -23,7 +27,11 @@ class Schedule extends React.Component {
         } else {
             this.state = {
                 class: Config.user.getClass(),
-                day: null,
+                day: {
+                    week: this.props.params.time.substring(0, 1),
+                    day: this.props.params.time.substring(1, 2),
+                    period: 1
+                },
                 schedule: null,
                 classList: null,
                 locationList: null
@@ -38,7 +46,11 @@ class Schedule extends React.Component {
         console.log("Data gotten!");
         let info = data.getData();
         this.setState({
-            day: info.time,
+            day: {
+                week: this.props.params.time.substring(0, 1),
+                day: this.props.params.time.substring(1, 2),
+                period: 1
+            },
             schedule: info.schedule,
             classList: info.classes,
             locationList: info.locations

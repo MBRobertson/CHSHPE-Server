@@ -21,6 +21,7 @@ class Schedule extends React.Component {
             locationList: null,
             time: null,
             currentPage: '',
+            dayName: '',
             period: 1
         }
 
@@ -98,7 +99,7 @@ class Schedule extends React.Component {
                 <div id="schedulePage">
                     {/*<h3>Schedule</h3>*/}
                     {/*<Link to="/print" className="button print-button">Print Schedule</Link>*/}
-                    <a href="/print" target="_blank" className="button print-button">Print Schedule</a>
+                    <a href={"/print/" + this.state.currentPage} target="_blank" className="button print-button">{"Print Schedule For Day " + dnum}</a>
                     <ScheduleHeader handler={this.changePage} periodChange={this.changePeriod.bind(this)} currentPage={this.state.currentPage} time={this.state.time}/>
                     <ClassHandler time={time} classList={this.state.classList} locationList={this.state.locationList} dnum={dnum}/>
                 </div>

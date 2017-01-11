@@ -59,7 +59,7 @@ class Home extends React.Component {
 ReactDOM.render(
     (<Router history={browserHistory}>
         <Route path="/login" component={Login}/>
-        <Route path="/print" component={Printable}/>
+        <Route path="/print/:time" component={Printable}/>
         <Route path="/" component={App}>
             <IndexRoute path="" component={Schedule}/>
             <Route path="manage">
