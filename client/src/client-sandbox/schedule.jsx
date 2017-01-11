@@ -106,8 +106,25 @@ class Schedule extends React.Component {
                 )
             }
 
+            let weekdays = {
+                0: "Monday",
+                1: "Tuesday",
+                2: "Wednesday",
+                3: "Thursday",
+                4: "Friday"
+            }
+
+            let time = this.props.params.time;
+            let week = time.substring(0, 1);
+            let day = parseInt(time.substring(1, 2)) + (week == 'B' ? 5 : 0);
+            let weekday = weekdays[(day-1) % 5];
+
             return (
                 <div id="printPage">
+                    <div className="print-header">
+                        <h1 className="print-header-daytext">{weekday}</h1>
+                        <h1 className="print-header-day">{"Day " + day}</h1>
+                    </div>
                     {scheduleItems}
                     <a to="/print" onClick={window.close} className="button no-print">Back</a>
                 </div>)
