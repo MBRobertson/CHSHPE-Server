@@ -32,22 +32,36 @@ function getTime() {
     });
 }
 
-function getSchedule() {
-    //gotData['time'] = false;
-    //gotData['schedule'] = false;
-    Config.time.getDay((day) => {
-        time = {
-            'week': day.week,
-            'day': day.day,
-            'period': day.period
-        };
+function getSchedule(dayOverride) {
+    if (dayOverride)
+    {
+        time = dayOverride;
         gotData.time = true;
-        Config.time.getSchedule(Config.time.toString(day, true), (scheduleData) => {
+        Config.time.getSchedule(Config.time.toString(dayOverride, true), (scheduleData) => {
             schedule = scheduleData;
             gotData.schedule = true;
             verifyData();
         })
-    });
+    }
+    else
+    {
+        Config.time.getDay((day) => {
+            time = {
+                'week': day.week,
+                'day': day.day,
+                'period': day.period
+            };
+            gotData.time = true;
+            Config.time.getSchedule(Config.time.toString(day, true), (scheduleData) => {
+                schedule = scheduleData;
+                gotData.schedule = true;
+                verifyData();
+            })
+        });
+    }
+    //gotData['time'] = false;
+    //gotData['schedule'] = false;
+    
 }
 
 function getClasses() {
@@ -80,10 +94,10 @@ function checkData() {
 
 var waiting = false;
 
-function beginFetch() {
+function beginFetch(dayOverride) {
     if (waiting) return;
     resetData();
-    getSchedule();
+    getSchedule(dayOverride);
     getClasses();
     getLocations();
     getTeachers();

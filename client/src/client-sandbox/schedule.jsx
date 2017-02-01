@@ -58,7 +58,11 @@ class Schedule extends React.Component {
     }
 
     componentDidMount() {
-        data.beginFetch();
+        data.beginFetch({
+                week: this.props.params.time.substring(0, 1),
+                day: this.props.params.time.substring(1, 2),
+                period: 1
+            });
         //data.setReadyFunc(this.populateData)
         document.addEventListener("dataready", this.populateData, false);
     }
@@ -68,7 +72,7 @@ class Schedule extends React.Component {
     }
 
     refresh() {
-        data.getSchedule();
+        data.getSchedule(this.state.day);
         data.getClasses();
         data.getLocations();
         data.verifyData();
