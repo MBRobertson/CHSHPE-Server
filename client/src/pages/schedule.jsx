@@ -83,6 +83,18 @@ class Schedule extends React.Component {
         })
     }
 
+    updateLoc(callforward)
+    {
+        auth.req('/api/loc/', {
+            success: (lList) => {
+                lList.unshift({ _id: '', name: '(None)'})
+                this.setState({ locationList: lList });
+                if (callforward)
+                    callforward();
+            }
+        });
+    }
+
     render() {
         if (!(this.state.time && this.state.classList && this.state.locationList)) {
             return (
@@ -101,7 +113,7 @@ class Schedule extends React.Component {
                     {/*<Link to="/print" className="button print-button">Print Schedule</Link>*/}
                     <a href={"/print/" + this.state.currentPage} target="_blank" className="button print-button">{"Print Schedule For Day " + dnum}</a>
                     <ScheduleHeader handler={this.changePage} periodChange={this.changePeriod.bind(this)} currentPage={this.state.currentPage} time={this.state.time}/>
-                    <ClassHandler time={time} classList={this.state.classList} locationList={this.state.locationList} dnum={dnum}/>
+                    <ClassHandler time={time} saveCallback={this.updateLoc.bind(this)} classList={this.state.classList} locationList={this.state.locationList} dnum={dnum}/>
                 </div>
             )
         }
@@ -160,11 +172,25 @@ class ClassHandler extends React.Component {
 
             auth.req('/api/schedule/' + this.getTime(), {
                 success: (d) => {
-                    this.setState({
-                        saving: false
-                    })
+                    
+                    if (this.props.saveCallback)
+                    {
+                        this.props.saveCallback(() => {
+                            this.setState({
+                                saving: false
+                            });
+                        });
+
+                    }
+                    else
+                    {
+                        this.setState({
+                            saving: false
+                        });
+                    }
                 }
             }, { locations: data}, 'PUT');
+            
         }
 
     }
