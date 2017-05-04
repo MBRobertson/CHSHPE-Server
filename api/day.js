@@ -6,7 +6,7 @@ moment.tz.setDefault("NZ");
 
 var periodsold = {
     1: {
-        start: moment.tz("8:30am", "h:mma", "NZ"),
+        start: moment.tz("7:00am", "h:mma", "NZ"),
         end: moment.tz("9:35am", "h:mma", "NZ")
     },
     2: {
@@ -29,7 +29,7 @@ var periodsold = {
 
 var periods = {
     1: {
-        start: { hour: 8, minute: 30 },
+        start: { hour: 7, minute: 0 },
         end:{ hour: 9, minute: 30 }
     },
     2: {
