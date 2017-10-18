@@ -4,7 +4,8 @@
   "description": "Server side api and interface for the CHSPE app",
   "main": "app.js",
   "scripts": {
-    "start": "node app"
+    "start": "node app",
+    "build": "webpack -p"
   },
   "author": "Michael Robertson",
   "license": "ISC",
